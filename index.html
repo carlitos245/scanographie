@@ -11,5 +11,33 @@
     <h1>TEXT POUR BOUCLE</h1>
     <a href="index1.html"><img src="image_cachee.png" alt="photo"/></a>
     <a><div>Click ici</div></a>
+        <marquee><h3>RECHERCHE UN FICHIER</h3></marquee>
+<!-- Créez un input de type "file" dans votre HTML-->
+<center><input type="file" id="fileInput"></center>
+
+<script>
+    // Sélectionnez l'élément input
+    const fileInput = document.getElementById('fileInput');
+
+    // Écoutez l'événement "change" lorsque l'utilisateur sélectionne un fichier
+    fileInput.addEventListener('change', handleFileSelect);
+
+    function handleFileSelect(event) {
+        const file = event.target.files[0]; // Récupérez le fichier sélectionné
+
+        if (file) {
+            const reader = new FileReader();
+
+            // Lorsque le fichier est chargé, exécutez cette fonction
+            reader.onload = function (e) {
+                const content = e.target.result; // Contenu du fichier
+                alert(content); // Affichez le contenu dans la console
+            };
+
+            // Lisez le contenu du fichier en tant que texte
+            reader.readAsText(file);
+        }
+    }
+</script>
 </body>
 </html>
