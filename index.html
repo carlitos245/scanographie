@@ -12,33 +12,38 @@
     <a href="index1.html"><img src="image_cachee.png" alt="photo"/></a>
 
     
-        <marquee><h3>RECHERCHE UN FICHIER</h3></marquee>
-<!-- Créez un input de type "file" dans votre HTML-->
-<center><input type="file" id="fileInput"></center>
+    <marquee><h3>RECHERCHE UN FICHIER IMAGE</h3></marquee>
+    <!-- Créez un input de type "file" dans votre HTML -->
+    <center><input type="file" id="fileInput"></center>
 
-<script>
-    // Sélectionnez l'élément input
-    const fileInput = document.getElementById('fileInput');
+    <!-- Ajoutez un élément image vide -->
+    <img id="imageDisplay" style="display: none;">
 
-    // Écoutez l'événement "change" lorsque l'utilisateur sélectionne un fichier
-    fileInput.addEventListener('change', handleFileSelect);
+    <script>
+        // Sélectionnez l'élément input
+        const fileInput = document.getElementById('fileInput');
+        const imageDisplay = document.getElementById('imageDisplay');
 
-    function handleFileSelect(event) {
-        const file = event.target.files[0]; // Récupérez le fichier sélectionné
+        // Écoutez l'événement "change" lorsque l'utilisateur sélectionne un fichier
+        fileInput.addEventListener('change', handleFileSelect);
 
-        if (file) {
-            const reader = new FileReader();
+        function handleFileSelect(event) {
+            const file = event.target.files[0]; // Récupérez le fichier sélectionné
 
-            // Lorsque le fichier est chargé, exécutez cette fonction
-            reader.onload = function (e) {
-                const content = e.target.result; // Contenu du fichier
-                alert(content); // Affichez le contenu dans la console
-            };
+            if (file) {
+                const reader = new FileReader();
 
-            // Lisez le contenu du fichier en tant que texte
-            reader.readAsText(file);
+                // Lorsque le fichier est chargé, exécutez cette fonction
+                reader.onload = function (e) {
+                    const content = e.target.result; // Contenu du fichier
+                    imageDisplay.src = content; // Définissez l'URL de l'image
+                    imageDisplay.style.display = 'block'; // Affichez l'image
+                };
+
+                // Lisez le contenu du fichier en tant que base64 (pour les images)
+                reader.readAsDataURL(file);
+            }
         }
-    }
-</script>
+    </script>
 </body>
 </html>
